@@ -2,9 +2,37 @@
 import React, { useState, useEffect } from 'react';
 import NeonButton from '@/components/NeonButton';
 import { cn } from '@/lib/utils';
-import { Moon, Sun, Languages, Menu, X } from 'lucide-react';
+import { Moon, Sun, Menu, X, ChevronDown } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Switch } from '@/components/ui/switch';
+import { 
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
+
+// Object for translations
+const translations = {
+  en: {
+    about: "About",
+    timeline: "Timeline",
+    skills: "Skills",
+    projects: "Projects",
+    contact: "Contact",
+    viewCv: "View CV",
+    terminal: "Terminal"
+  },
+  fr: {
+    about: "À propos",
+    timeline: "Parcours",
+    skills: "Compétences",
+    projects: "Projets",
+    contact: "Contact",
+    viewCv: "Voir CV",
+    terminal: "Terminal"
+  }
+};
 
 interface NavbarProps {
   onOpenTerminal: () => void;
@@ -13,10 +41,11 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal, onOpenCV }) => {
   const [scrolled, setScrolled] = useState(false);
-  const [language, setLanguage] = useState<'EN' | 'FR'>('EN');
+  const [language, setLanguage] = useState<'en' | 'fr'>('en');
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isMobile = useIsMobile();
+  const t = translations[language];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,19 +67,25 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal, onOpenCV }) => {
 
   useEffect(() => {
     // Apply language to the document
-    document.documentElement.lang = language.toLowerCase();
-    // In a real app, we would load the translations here
+    document.documentElement.lang = language;
+    // Store the language preference in localStorage
+    localStorage.setItem('language', language);
     console.log(`Language changed to ${language}`);
   }, [language]);
 
-  const toggleLanguage = () => {
-    setLanguage(prev => prev === 'EN' ? 'FR' : 'EN');
-    console.log('Language toggled');
-  };
+  // Initialize language from localStorage on component mount
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('language') as 'en' | 'fr';
+    if (savedLanguage) {
+      setLanguage(savedLanguage);
+    }
+  }, []);
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
-    console.log('Theme toggled');
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    console.log('Theme toggled to', newTheme);
   };
 
   const scrollToSection = (sectionId: string) => {
@@ -63,7 +98,13 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal, onOpenCV }) => {
     }
   };
 
-  const navigationLinks = ['About', 'Timeline', 'Skills', 'Projects', 'Contact'];
+  const navigationLinks = [
+    { id: 'about', label: t.about },
+    { id: 'timeline', label: t.timeline },
+    { id: 'skills', label: t.skills },
+    { id: 'projects', label: t.projects },
+    { id: 'contact', label: t.contact },
+  ];
 
   return (
     <header className={cn(
@@ -87,8 +128,8 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal, onOpenCV }) => {
         <div className="hidden md:flex items-center space-x-6 font-mono text-sm">
           {navigationLinks.map((item) => (
             <button 
-              key={item} 
-              onClick={() => scrollToSection(item.toLowerCase())}
+              key={item.id} 
+              onClick={() => scrollToSection(item.id)}
               className={cn(
                 "relative px-2 py-1 text-gray-300 hover:text-hacker-green",
                 "after:absolute after:bottom-0 after:left-0 after:h-0.5",
@@ -98,7 +139,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal, onOpenCV }) => {
                 "hover:animate-glitch-hover"
               )}
             >
-              {item}
+              {item.label}
             </button>
           ))}
           
@@ -108,7 +149,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal, onOpenCV }) => {
             onClick={onOpenCV}
             className="ml-2"
           >
-            View CV
+            {t.viewCv}
           </NeonButton>
 
           <NeonButton 
@@ -117,7 +158,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal, onOpenCV }) => {
             onClick={onOpenTerminal}
             className="ml-2"
           >
-            Terminal
+            {t.terminal}
           </NeonButton>
         </div>
 
@@ -134,20 +175,33 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal, onOpenCV }) => {
         {/* Theme & Language Controls */}
         <div className="hidden md:flex items-center space-x-4">
           <div className="flex items-center gap-2">
-            <button 
-              onClick={toggleLanguage}
-              className="text-gray-300 hover:text-hacker-green transition-colors flex items-center"
-            >
-              <Languages size={20} className="inline mr-1" />
-              <span className="font-mono text-xs">{language}</span>
-            </button>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1 text-gray-300 hover:text-hacker-green transition-colors font-mono text-xs">
+                {language === 'en' ? 'EN' : 'FR'}
+                <ChevronDown size={14} />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem 
+                  className={`${language === 'en' ? 'text-hacker-green' : ''}`} 
+                  onClick={() => setLanguage('en')}
+                >
+                  English
+                </DropdownMenuItem>
+                <DropdownMenuItem 
+                  className={`${language === 'fr' ? 'text-hacker-cyan' : ''}`} 
+                  onClick={() => setLanguage('fr')}
+                >
+                  Français
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           <div className="flex items-center gap-2">
             <Moon size={16} className={`text-gray-300 ${theme === 'dark' ? 'text-hacker-green' : ''}`} />
             <Switch 
               checked={theme === 'light'} 
-              onCheckedChange={() => toggleTheme()} 
+              onCheckedChange={toggleTheme} 
               className="data-[state=checked]:bg-hacker-cyan data-[state=unchecked]:bg-hacker-green"
             />
             <Sun size={16} className={`text-gray-300 ${theme === 'light' ? 'text-hacker-cyan' : ''}`} />
@@ -166,11 +220,11 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal, onOpenCV }) => {
             <div className="space-y-3">
               {navigationLinks.map((item) => (
                 <button 
-                  key={item} 
-                  onClick={() => scrollToSection(item.toLowerCase())}
+                  key={item.id} 
+                  onClick={() => scrollToSection(item.id)}
                   className="block w-full text-left px-3 py-2 text-gray-300 hover:text-hacker-green hover:bg-hacker-dark/50 rounded-md transition-colors"
                 >
-                  {item}
+                  {item.label}
                 </button>
               ))}
             </div>
@@ -182,7 +236,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal, onOpenCV }) => {
                 onClick={onOpenCV}
                 className="w-full"
               >
-                View CV
+                {t.viewCv}
               </NeonButton>
 
               <NeonButton 
@@ -191,23 +245,22 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal, onOpenCV }) => {
                 onClick={onOpenTerminal}
                 className="w-full"
               >
-                Terminal
+                {t.terminal}
               </NeonButton>
             </div>
 
             <div className="flex justify-between pt-3 border-t border-hacker-grey">
               <div className="flex items-center gap-2">
-                <Languages size={20} className="text-gray-300" />
                 <div className="flex bg-hacker-grey rounded-md">
                   <button
-                    className={`px-3 py-1 rounded-md ${language === 'EN' ? 'bg-hacker-dark text-hacker-green' : 'text-gray-300'}`}
-                    onClick={() => setLanguage('EN')}
+                    className={`px-3 py-1 rounded-md ${language === 'en' ? 'bg-hacker-dark text-hacker-green' : 'text-gray-300'}`}
+                    onClick={() => setLanguage('en')}
                   >
                     EN
                   </button>
                   <button
-                    className={`px-3 py-1 rounded-md ${language === 'FR' ? 'bg-hacker-dark text-hacker-cyan' : 'text-gray-300'}`}
-                    onClick={() => setLanguage('FR')}
+                    className={`px-3 py-1 rounded-md ${language === 'fr' ? 'bg-hacker-dark text-hacker-cyan' : 'text-gray-300'}`}
+                    onClick={() => setLanguage('fr')}
                   >
                     FR
                   </button>
@@ -218,7 +271,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal, onOpenCV }) => {
                 <Moon size={16} className={`text-gray-300 ${theme === 'dark' ? 'text-hacker-green' : ''}`} />
                 <Switch 
                   checked={theme === 'light'} 
-                  onCheckedChange={() => toggleTheme()} 
+                  onCheckedChange={toggleTheme} 
                   className="data-[state=checked]:bg-hacker-cyan data-[state=unchecked]:bg-hacker-green"
                 />
                 <Sun size={16} className={`text-gray-300 ${theme === 'light' ? 'text-hacker-cyan' : ''}`} />

@@ -362,25 +362,34 @@
     background: #00FF41;
     box-shadow: 0 0 10px #00FF41;
   }
+
+  /* Add dropdown menu style overrides */
+  .dark-theme .dropdown-menu-content {
+    @apply bg-hacker-darker border border-hacker-grey;
+  }
+  
+  .light-theme .dropdown-menu-content {
+    @apply bg-card border border-border;
+  }
 }
 
 /* Add light theme specific styles */
-  .light-theme .text-hacker-green {
-    @apply text-primary;
-  }
+.light-theme .text-hacker-green {
+  @apply text-primary;
+}
 
-  .light-theme .text-hacker-cyan {
-    @apply text-accent;
-  }
+.light-theme .text-hacker-cyan {
+  @apply text-accent;
+}
 
-  .light-theme .bg-hacker-dark {
-    @apply bg-background;
-  }
+.light-theme .bg-hacker-dark {
+  @apply bg-background;
+}
 
-  .light-theme .bg-hacker-darker {
-    @apply bg-card;
-  }
+.light-theme .bg-hacker-darker {
+  @apply bg-card;
+}
 
-  .light-theme .border-hacker-grey {
-    @apply border-border;
-  }
+.light-theme .border-hacker-grey {
+  @apply border-border;
+}

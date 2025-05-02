@@ -11,6 +11,7 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import CV from '@/components/CV';
 import CustomCursor from '@/components/CustomCursor';
+import DynamicBackground from '@/components/DynamicBackground';
 
 // Import for animations
 import { motion, AnimatePresence } from 'framer-motion';
@@ -23,6 +24,18 @@ const Index = () => {
     "Welcome to Aziz Rayene Delaa's portfolio terminal.",
     "Type 'help' to see available commands."
   ]);
+
+  // Initialize theme from localStorage on component mount
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      document.documentElement.classList.add('light-theme');
+      document.documentElement.classList.remove('dark-theme');
+    } else {
+      document.documentElement.classList.add('dark-theme');
+      document.documentElement.classList.remove('light-theme');
+    }
+  }, []);
 
   const handleRunCommand = (command: string) => {
     // Add command to history
@@ -186,6 +199,7 @@ const Index = () => {
         "selection:bg-hacker-green selection:text-hacker-dark"
       )}
     >
+      <DynamicBackground />
       <CustomCursor />
       
       <Navbar 
