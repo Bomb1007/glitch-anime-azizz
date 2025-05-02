@@ -2,7 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import NeonButton from '@/components/NeonButton';
 import { cn } from '@/lib/utils';
-import { Moon, Sun, Languages } from 'lucide-react';
+import { Moon, Sun, Languages, Menu, X } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { Switch } from '@/components/ui/switch';
 
 interface NavbarProps {
   onOpenTerminal: () => void;
@@ -13,6 +15,8 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal, onOpenCV }) => {
   const [scrolled, setScrolled] = useState(false);
   const [language, setLanguage] = useState<'EN' | 'FR'>('EN');
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,22 +30,40 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal, onOpenCV }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrolled]);
 
+  useEffect(() => {
+    // Apply theme to the document
+    document.documentElement.classList.toggle('light-theme', theme === 'light');
+    document.documentElement.classList.toggle('dark-theme', theme === 'dark');
+  }, [theme]);
+
+  useEffect(() => {
+    // Apply language to the document
+    document.documentElement.lang = language.toLowerCase();
+    // In a real app, we would load the translations here
+    console.log(`Language changed to ${language}`);
+  }, [language]);
+
   const toggleLanguage = () => {
     setLanguage(prev => prev === 'EN' ? 'FR' : 'EN');
-    // In a real app, we would implement language switching logic here
+    console.log('Language toggled');
   };
 
   const toggleTheme = () => {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark');
-    // In a real app, we would implement theme switching logic here
+    console.log('Theme toggled');
   };
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
+      if (isMobile) {
+        setMobileMenuOpen(false);
+      }
     }
   };
+
+  const navigationLinks = ['About', 'Timeline', 'Skills', 'Projects', 'Contact'];
 
   return (
     <header className={cn(
@@ -61,8 +83,9 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal, onOpenCV }) => {
           </span>
         </div>
 
+        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-6 font-mono text-sm">
-          {['About', 'Timeline', 'Skills', 'Projects', 'Contact'].map((item) => (
+          {navigationLinks.map((item) => (
             <button 
               key={item} 
               onClick={() => scrollToSection(item.toLowerCase())}
@@ -98,27 +121,112 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTerminal, onOpenCV }) => {
           </NeonButton>
         </div>
 
-        <div className="flex items-center space-x-4">
+        {/* Mobile Menu Button */}
+        <div className="md:hidden flex items-center">
           <button 
-            onClick={toggleLanguage}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="text-gray-300 hover:text-hacker-green transition-colors"
           >
-            <Languages size={20} className="inline mr-1" />
-            <span className="font-mono text-xs">{language}</span>
-          </button>
-
-          <button 
-            onClick={toggleTheme}
-            className="text-gray-300 hover:text-hacker-green transition-colors"
-          >
-            {theme === 'dark' ? (
-              <Moon size={20} />
-            ) : (
-              <Sun size={20} />
-            )}
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
+
+        {/* Theme & Language Controls */}
+        <div className="hidden md:flex items-center space-x-4">
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={toggleLanguage}
+              className="text-gray-300 hover:text-hacker-green transition-colors flex items-center"
+            >
+              <Languages size={20} className="inline mr-1" />
+              <span className="font-mono text-xs">{language}</span>
+            </button>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Moon size={16} className={`text-gray-300 ${theme === 'dark' ? 'text-hacker-green' : ''}`} />
+            <Switch 
+              checked={theme === 'light'} 
+              onCheckedChange={() => toggleTheme()} 
+              className="data-[state=checked]:bg-hacker-cyan data-[state=unchecked]:bg-hacker-green"
+            />
+            <Sun size={16} className={`text-gray-300 ${theme === 'light' ? 'text-hacker-cyan' : ''}`} />
+          </div>
+        </div>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {isMobile && (
+        <div className={`
+          md:hidden bg-hacker-darker border-t border-hacker-grey shadow-lg 
+          transition-all duration-300 overflow-hidden
+          ${mobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}
+        `}>
+          <div className="container mx-auto px-4 py-4 space-y-4">
+            <div className="space-y-3">
+              {navigationLinks.map((item) => (
+                <button 
+                  key={item} 
+                  onClick={() => scrollToSection(item.toLowerCase())}
+                  className="block w-full text-left px-3 py-2 text-gray-300 hover:text-hacker-green hover:bg-hacker-dark/50 rounded-md transition-colors"
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex flex-col space-y-4 pt-3 border-t border-hacker-grey">
+              <NeonButton 
+                variant="outline" 
+                size="sm"
+                onClick={onOpenCV}
+                className="w-full"
+              >
+                View CV
+              </NeonButton>
+
+              <NeonButton 
+                variant="green" 
+                size="sm"
+                onClick={onOpenTerminal}
+                className="w-full"
+              >
+                Terminal
+              </NeonButton>
+            </div>
+
+            <div className="flex justify-between pt-3 border-t border-hacker-grey">
+              <div className="flex items-center gap-2">
+                <Languages size={20} className="text-gray-300" />
+                <div className="flex bg-hacker-grey rounded-md">
+                  <button
+                    className={`px-3 py-1 rounded-md ${language === 'EN' ? 'bg-hacker-dark text-hacker-green' : 'text-gray-300'}`}
+                    onClick={() => setLanguage('EN')}
+                  >
+                    EN
+                  </button>
+                  <button
+                    className={`px-3 py-1 rounded-md ${language === 'FR' ? 'bg-hacker-dark text-hacker-cyan' : 'text-gray-300'}`}
+                    onClick={() => setLanguage('FR')}
+                  >
+                    FR
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Moon size={16} className={`text-gray-300 ${theme === 'dark' ? 'text-hacker-green' : ''}`} />
+                <Switch 
+                  checked={theme === 'light'} 
+                  onCheckedChange={() => toggleTheme()} 
+                  className="data-[state=checked]:bg-hacker-cyan data-[state=unchecked]:bg-hacker-green"
+                />
+                <Sun size={16} className={`text-gray-300 ${theme === 'light' ? 'text-hacker-cyan' : ''}`} />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 };
