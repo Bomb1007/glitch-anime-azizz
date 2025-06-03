@@ -1,18 +1,19 @@
-
 import React, { useState, useEffect } from 'react';
 import NeonButton from './NeonButton';
 import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 interface HeroProps {
   onOpenTerminal: () => void;
 }
 
 const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
+  const { t } = useTranslation();
   const [typedText, setTypedText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
   const [isComplete, setIsComplete] = useState(false);
   
-  const fullText = "Hi, I'm Aziz Rayene Delaa";
+  const fullText = t('hero.title');
 
   useEffect(() => {
     if (typedText.length < fullText.length) {
@@ -56,7 +57,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
       <div className="container mx-auto px-4 z-10">
         <div className="text-center">
           {/* Typing text effect */}
-          <h1 className="font-mono text-5xl md:text-7xl mb-6 relative inline-block">
+          <h1 className="font-mono text-5xl md:text-7xl mb-6 relative inline-block text-white dark:text-hacker-green">
             <span data-text={typedText} className="glitch-effect relative inline-block">
               {typedText}
             </span>
@@ -68,11 +69,12 @@ const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
           </h1>
           
           <p className={cn(
-            "text-xl md:text-2xl mb-12 text-gray-400 max-w-3xl mx-auto",
+            "text-xl md:text-2xl mb-12 text-white dark:text-white max-w-3xl mx-auto",
             isComplete ? "opacity-100" : "opacity-0",
             "transition-opacity duration-500"
           )}>
-            Web, Mobile and Desktop Developer<br />based in Montreal
+            {t('hero.subtitle')}<br />
+            {t('hero.description')}
           </p>
           
           <div className={cn(
@@ -85,7 +87,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
               size="lg"
               onClick={onOpenTerminal}
             >
-              Open Terminal
+              {t('navigation.terminal')}
             </NeonButton>
             <NeonButton 
               variant="outline"
@@ -95,25 +97,29 @@ const Hero: React.FC<HeroProps> = ({ onOpenTerminal }) => {
                   behavior: 'smooth'
                 });
               }}
+              className="text-white border-white hover:text-hacker-cyan hover:border-hacker-cyan"
             >
-              Discover More
+              {t('hero.cta')}
             </NeonButton>
           </div>
         </div>
       </div>
       
       {/* Scroll indicator */}
+      {/* Texte scrollDown supprimé */}
+      {/*
       <div className={cn(
         "absolute bottom-10 left-1/2 transform -translate-x-1/2",
         "flex flex-col items-center",
         isComplete ? "opacity-100" : "opacity-0",
         "transition-opacity duration-1000 delay-1000"
       )}>
-        <span className="text-gray-400 text-sm mb-2 font-mono">Scroll Down</span>
-        <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
+        <span className="text-gray-900 dark:text-gray-400 text-sm mb-2 font-mono">{t('common.scrollDown')}</span>
+        <div className="w-6 h-10 border-2 border-gray-900 dark:border-gray-400 rounded-full flex justify-center">
           <div className="w-1 h-2 bg-hacker-green rounded-full mt-2 animate-bounce"></div>
         </div>
       </div>
+      */}
     </section>
   );
 };

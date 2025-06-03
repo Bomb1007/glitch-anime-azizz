@@ -1,0 +1,203 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "success": "Opération réussie",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "back": "Retour"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "about": "À propos",
+    "timeline": "Parcours",
+    "skills": "Compétences",
+    "projects": "Projets",
+    "contact": "Contact",
+    "viewCv": "Voir CV",
+    "terminal": "Terminal"
+  },
+  "auth": {
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "register": "Inscription",
+    "email": "Email",
+    "password": "Mot de passe",
+    "forgotPassword": "Mot de passe oublié ?"
+  },
+  "terminal": {
+    "welcome": "Bienvenue dans le terminal du portfolio d'Aziz Rayene Delaa.",
+    "help": "Tapez 'help' pour voir les commandes disponibles.",
+    "commands": {
+      "help": "Afficher ce message d'aide",
+      "about": "Afficher une brève biographie",
+      "timeline": "Afficher ma chronologie professionnelle",
+      "skills": "Afficher mes compétences techniques",
+      "projects": "Liste de mes projets",
+      "contact": "Obtenir mes informations de contact",
+      "cv": "Ouvrir mon CV",
+      "exit": "Fermer ce terminal"
+    },
+    "about": {
+      "description": "Développeur full stack avec plus de 5 ans d'expérience dans le développement web, mobile et desktop.",
+      "specialization": "Spécialisé dans les solutions sécurisées et évolutives, avec un accent sur les technologies modernes et les meilleures pratiques de cybersécurité."
+    },
+    "timeline": {
+      "title": "Chronologie Professionnelle",
+      "present": "2023 - Présent: Développeur Full Stack Senior @ InnoTech Solutions",
+      "previous1": "2021 - 2023: Développeur Mobile @ AppFusion",
+      "previous2": "2018 - 2021: Développeur Web @ CodeCraft",
+      "previous3": "2016 - 2018: Développeur Junior @ TechStart"
+    },
+    "skills": {
+      "title": "Compétences Techniques",
+      "frontend": "Frontend: React, Angular, Vue.js, TypeScript, HTML/CSS",
+      "mobile": "Mobile: Flutter, React Native, Swift, Kotlin",
+      "devops": "DevOps: Docker, Kubernetes, CI/CD, AWS, Sécurité"
+    }
+  },
+  "hero": {
+    "title": "Aziz Rayene Delaa",
+    "subtitle": "Développeur Full Stack",
+    "description": "Création d'expériences digitales avec code et créativité",
+    "cta": "Découvrir Mon Travail"
+  },
+  "about": {
+    "title": "À Propos",
+    "description": "Je suis un développeur full stack passionné, spécialisé dans la création d'applications web modernes. Mon parcours dans la technologie est guidé par un désir constant d'apprendre et d'innover.",
+    "skills": {
+      "title": "Compétences Clés",
+      "frontend": "Développement Frontend",
+      "backend": "Développement Backend",
+      "devops": "DevOps & Cloud",
+      "mobile": "Développement Mobile"
+    }
+  },
+  "timeline": {
+    "title": "Mon Parcours",
+    "items": [
+      {
+        "date": "2023 - Présent",
+        "title": "Développeur Full Stack Senior",
+        "company": "InnoTech Solutions",
+        "description": "Direction d'équipes de développement et mise en œuvre de solutions innovantes pour les clients entreprises."
+      },
+      {
+        "date": "2021 - 2023",
+        "title": "Développeur Mobile",
+        "company": "AppFusion",
+        "description": "Développement d'applications mobiles multiplateformes avec React Native et Flutter."
+      },
+      {
+        "date": "2018 - 2021",
+        "title": "Développeur Web",
+        "company": "CodeCraft",
+        "description": "Création d'applications web responsives avec les frameworks JavaScript modernes."
+      },
+      {
+        "date": "2016 - 2018",
+        "title": "Développeur Junior",
+        "company": "TechStart",
+        "description": "Début de ma carrière dans le développement logiciel, apprentissage des fondamentaux."
+      }
+    ]
+  },
+  "projects": {
+    "title": "Projets Principaux",
+    "description": "Une sélection de mes projets les plus significatifs",
+    "items": [
+      {
+        "title": "Plateforme E-Commerce",
+        "description": "Une plateforme e-commerce complète avec gestion d'inventaire en temps réel et traitement des paiements.",
+        "technologies": "React, Node.js, MongoDB, Stripe",
+        "link": "Voir le Projet"
+      },
+      {
+        "title": "Application de Gestion de Tâches",
+        "description": "Une application collaborative de gestion de tâches avec mises à jour en temps réel et fonctionnalités d'équipe.",
+        "technologies": "Vue.js, Firebase, GraphQL",
+        "link": "Voir le Projet"
+      },
+      {
+        "title": "Système de Surveillance de Santé",
+        "description": "Une application mobile pour suivre les indicateurs de santé et se connecter avec les professionnels de santé.",
+        "technologies": "Flutter, Node.js, PostgreSQL",
+        "link": "Voir le Projet"
+      },
+      {
+        "title": "Site Portfolio",
+        "description": "Un site portfolio personnel présentant mes compétences et projets.",
+        "technologies": "React, TypeScript, Tailwind CSS",
+        "link": "Voir le Projet"
+      }
+    ]
+  },
+  "skills": {
+    "title": "Expertise Technique",
+    "description": "Mes compétences et les technologies que j'utilise",
+    "categories": {
+      "frontend": {
+        "title": "Développement Frontend",
+        "items": [
+          "React",
+          "Vue.js",
+          "Angular",
+          "TypeScript",
+          "HTML/CSS",
+          "Tailwind CSS"
+        ]
+      },
+      "backend": {
+        "title": "Développement Backend",
+        "items": [
+          "Node.js",
+          "Python",
+          "Java",
+          "SQL",
+          "MongoDB",
+          "GraphQL"
+        ]
+      },
+      "devops": {
+        "title": "DevOps & Cloud",
+        "items": [
+          "Docker",
+          "Kubernetes",
+          "AWS",
+          "CI/CD",
+          "Git",
+          "Linux"
+        ]
+      },
+      "mobile": {
+        "title": "Développement Mobile",
+        "items": [
+          "React Native",
+          "Flutter",
+          "Swift",
+          "Kotlin",
+          "iOS",
+          "Android"
+        ]
+      }
+    }
+  },
+  "contact": {
+    "title": "Contactez-moi",
+    "description": "N'hésitez pas à me contacter pour des collaborations ou simplement pour échanger",
+    "form": {
+      "name": "Nom",
+      "email": "Email",
+      "message": "Message",
+      "send": "Envoyer le Message"
+    },
+    "social": {
+      "title": "Connectez-vous avec moi",
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "twitter": "Twitter"
+    }
+  }
+} 

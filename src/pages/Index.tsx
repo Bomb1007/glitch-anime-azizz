@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
@@ -12,29 +11,25 @@ import Footer from '@/components/Footer';
 import CV from '@/components/CV';
 import CustomCursor from '@/components/CustomCursor';
 import DynamicBackground from '@/components/DynamicBackground';
+import { useTranslation } from 'react-i18next';
 
 // Import for animations
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 const Index = () => {
+  const { t } = useTranslation();
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const [isCVOpen, setIsCVOpen] = useState(false);
   const [terminalHistory, setTerminalHistory] = useState<string[]>([
-    "Welcome to Aziz Rayene Delaa's portfolio terminal.",
-    "Type 'help' to see available commands."
+    t('terminal.welcome'),
+    t('terminal.help')
   ]);
 
   // Initialize theme from localStorage on component mount
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-      document.documentElement.classList.add('light-theme');
-      document.documentElement.classList.remove('dark-theme');
-    } else {
-      document.documentElement.classList.add('dark-theme');
-      document.documentElement.classList.remove('light-theme');
-    }
+    document.documentElement.classList.add('dark-theme');
+    document.documentElement.classList.remove('light-theme');
   }, []);
 
   const handleRunCommand = (command: string) => {
@@ -46,38 +41,30 @@ const Index = () => {
       case 'help':
         setTerminalHistory(prev => [
           ...prev,
-          "Available commands:",
-          "  help     - Show this help message",
-          "  about    - Display a brief bio",
-          "  timeline - Show my professional timeline",
-          "  skills   - Display my technical skills",
-          "  projects - List my projects",
-          "  contact  - Get my contact information",
-          "  cv       - Open my CV",
-          "  exit     - Close this terminal"
+          '__SHOW_HELP__'
         ]);
         break;
         
       case 'about':
         setTerminalHistory(prev => [
           ...prev,
-          "Full stack developer with 5+ years of experience in web, mobile, and desktop applications.",
-          "Specializing in secure, scalable solutions with a focus on modern technologies and cybersecurity best practices.",
+          t('terminal.about.description'),
+          t('terminal.about.specialization'),
           "",
-          "Type 'help' to see other commands."
+          t('terminal.help')
         ]);
         break;
         
       case 'timeline':
         setTerminalHistory(prev => [
           ...prev,
-          "Professional Timeline:",
-          "2023 - Present: Senior Full Stack Developer @ InnoTech Solutions",
-          "2021 - 2023: Mobile Developer @ AppFusion",
-          "2018 - 2021: Web Developer @ CodeCraft",
-          "2016 - 2018: Junior Developer @ TechStart",
+          t('terminal.timeline.title'),
+          t('terminal.timeline.present'),
+          t('terminal.timeline.previous1'),
+          t('terminal.timeline.previous2'),
+          t('terminal.timeline.previous3'),
           "",
-          "For more details, scroll to the Timeline section."
+          t('terminal.help')
         ]);
         scrollToSection('timeline');
         break;
@@ -85,81 +72,43 @@ const Index = () => {
       case 'skills':
         setTerminalHistory(prev => [
           ...prev,
-          "Technical Skills:",
-          "- Frontend: React, Angular, Vue.js, TypeScript, HTML/CSS",
-          "- Mobile: Flutter, React Native, Swift, Kotlin",
-          "- DevOps: Docker, Kubernetes, CI/CD, AWS, Security",
+          t('terminal.skills.title'),
+          t('terminal.skills.frontend'),
+          t('terminal.skills.mobile'),
+          t('terminal.skills.devops'),
           "",
-          "For detailed skill ratings, scroll to the Skills section."
+          t('terminal.help')
         ]);
         scrollToSection('skills');
         break;
         
       case 'projects':
-        setTerminalHistory(prev => [
-          ...prev,
-          "Projects Portfolio:",
-          "- E-commerce Platform (Web)",
-          "- Fitness Tracker App (Mobile)",
-          "- Smart Home System (IoT)",
-          "- Financial Dashboard (Web)",
-          "- AR Navigation App (Mobile)",
-          "- Environmental Monitoring (IoT)",
-          "",
-          "For more details, scroll to the Projects section."
-        ]);
+        setTerminalHistory(prev => [...prev, "Projects section will be displayed here."]);
         scrollToSection('projects');
         break;
         
       case 'contact':
-        setTerminalHistory(prev => [
-          ...prev,
-          "Contact Information:",
-          "Email: aziz.rayene@example.com",
-          "LinkedIn: linkedin.com/in/aziz-rayene",
-          "Phone: +1 (234) 567-890",
-          "",
-          "Or use the contact form in the Contact section."
-        ]);
+        setTerminalHistory(prev => [...prev, "Contact section will be displayed here."]);
         scrollToSection('contact');
         break;
         
       case 'cv':
-        setTerminalHistory(prev => [
-          ...prev,
-          "Opening CV..."
-        ]);
         setIsCVOpen(true);
         break;
         
       case 'exit':
-        setTerminalHistory(prev => [
-          ...prev,
-          "Closing terminal..."
-        ]);
-        setTimeout(() => {
-          setIsTerminalOpen(false);
-          // Reset terminal history for next time
-          setTerminalHistory([
-            "Welcome to Aziz Rayene Delaa's portfolio terminal.",
-            "Type 'help' to see available commands."
-          ]);
-        }, 500);
+        setIsTerminalOpen(false);
         break;
         
       default:
-        setTerminalHistory(prev => [
-          ...prev,
-          `Command not found: ${command}`,
-          "Type 'help' for available commands."
-        ]);
+        setTerminalHistory(prev => [...prev, `Command not found: ${command}`]);
     }
   };
 
   const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

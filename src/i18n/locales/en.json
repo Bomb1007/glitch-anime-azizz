@@ -1,0 +1,203 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Operation successful",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "timeline": "Timeline",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact",
+    "viewCv": "View CV",
+    "terminal": "Terminal"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?"
+  },
+  "terminal": {
+    "welcome": "Welcome to Aziz Rayene Delaa's portfolio terminal.",
+    "help": "Type 'help' to see available commands.",
+    "commands": {
+      "help": "Show this help message",
+      "about": "Display a brief bio",
+      "timeline": "Show my professional timeline",
+      "skills": "Display my technical skills",
+      "projects": "List my projects",
+      "contact": "Get my contact information",
+      "cv": "Open my CV",
+      "exit": "Close this terminal"
+    },
+    "about": {
+      "description": "Full stack developer with 5+ years of experience in web, mobile, and desktop applications.",
+      "specialization": "Specializing in secure, scalable solutions with a focus on modern technologies and cybersecurity best practices."
+    },
+    "timeline": {
+      "title": "Professional Timeline",
+      "present": "2023 - Present: Senior Full Stack Developer @ InnoTech Solutions",
+      "previous1": "2021 - 2023: Mobile Developer @ AppFusion",
+      "previous2": "2018 - 2021: Web Developer @ CodeCraft",
+      "previous3": "2016 - 2018: Junior Developer @ TechStart"
+    },
+    "skills": {
+      "title": "Technical Skills",
+      "frontend": "Frontend: React, Angular, Vue.js, TypeScript, HTML/CSS",
+      "mobile": "Mobile: Flutter, React Native, Swift, Kotlin",
+      "devops": "DevOps: Docker, Kubernetes, CI/CD, AWS, Security"
+    }
+  },
+  "hero": {
+    "title": "Aziz Rayene Delaa",
+    "subtitle": "Full Stack Developer",
+    "description": "Crafting digital experiences with code and creativity",
+    "cta": "Explore My Work"
+  },
+  "about": {
+    "title": "About Me",
+    "description": "I am a passionate full stack developer with expertise in creating modern web applications. My journey in technology has been driven by a constant desire to learn and innovate.",
+    "skills": {
+      "title": "Key Skills",
+      "frontend": "Frontend Development",
+      "backend": "Backend Development",
+      "devops": "DevOps & Cloud",
+      "mobile": "Mobile Development"
+    }
+  },
+  "timeline": {
+    "title": "My Journey",
+    "items": [
+      {
+        "date": "2023 - Present",
+        "title": "Senior Full Stack Developer",
+        "company": "InnoTech Solutions",
+        "description": "Leading development teams and implementing cutting-edge solutions for enterprise clients."
+      },
+      {
+        "date": "2021 - 2023",
+        "title": "Mobile Developer",
+        "company": "AppFusion",
+        "description": "Developed cross-platform mobile applications using React Native and Flutter."
+      },
+      {
+        "date": "2018 - 2021",
+        "title": "Web Developer",
+        "company": "CodeCraft",
+        "description": "Built responsive web applications using modern JavaScript frameworks."
+      },
+      {
+        "date": "2016 - 2018",
+        "title": "Junior Developer",
+        "company": "TechStart",
+        "description": "Started my career in software development, learning the fundamentals."
+      }
+    ]
+  },
+  "projects": {
+    "title": "Featured Projects",
+    "description": "A selection of my most significant projects",
+    "items": [
+      {
+        "title": "E-Commerce Platform",
+        "description": "A full-featured e-commerce platform with real-time inventory management and payment processing.",
+        "technologies": "React, Node.js, MongoDB, Stripe",
+        "link": "View Project"
+      },
+      {
+        "title": "Task Management App",
+        "description": "A collaborative task management application with real-time updates and team features.",
+        "technologies": "Vue.js, Firebase, GraphQL",
+        "link": "View Project"
+      },
+      {
+        "title": "Health Monitoring System",
+        "description": "A mobile application for tracking health metrics and connecting with healthcare providers.",
+        "technologies": "Flutter, Node.js, PostgreSQL",
+        "link": "View Project"
+      },
+      {
+        "title": "Portfolio Website",
+        "description": "A personal portfolio website showcasing my skills and projects.",
+        "technologies": "React, TypeScript, Tailwind CSS",
+        "link": "View Project"
+      }
+    ]
+  },
+  "skills": {
+    "title": "Technical Expertise",
+    "description": "My skills and technologies I work with",
+    "categories": {
+      "frontend": {
+        "title": "Frontend Development",
+        "items": [
+          "React",
+          "Vue.js",
+          "Angular",
+          "TypeScript",
+          "HTML/CSS",
+          "Tailwind CSS"
+        ]
+      },
+      "backend": {
+        "title": "Backend Development",
+        "items": [
+          "Node.js",
+          "Python",
+          "Java",
+          "SQL",
+          "MongoDB",
+          "GraphQL"
+        ]
+      },
+      "devops": {
+        "title": "DevOps & Cloud",
+        "items": [
+          "Docker",
+          "Kubernetes",
+          "AWS",
+          "CI/CD",
+          "Git",
+          "Linux"
+        ]
+      },
+      "mobile": {
+        "title": "Mobile Development",
+        "items": [
+          "React Native",
+          "Flutter",
+          "Swift",
+          "Kotlin",
+          "iOS",
+          "Android"
+        ]
+      }
+    }
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "description": "Feel free to reach out for collaborations or just a friendly hello",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "send": "Send Message"
+    },
+    "social": {
+      "title": "Connect With Me",
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "twitter": "Twitter"
+    }
+  }
+} 
